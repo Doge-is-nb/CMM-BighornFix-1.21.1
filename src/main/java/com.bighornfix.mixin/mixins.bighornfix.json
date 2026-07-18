@@ -1,1 +1,29 @@
+package com.bighornfix.mixin;
 
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.entity.state.SheepRenderState;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import twilightforest.client.model.entity.BighornModel;
+
+@Mixin(BighornModel.class)
+public class BighornModelMixin {
+
+    @Inject(
+        method = "setupAnim",
+        at = @At("RETURN"),
+        remap = false
+    )
+    private void hideHorns(SheepRenderState state, CallbackInfo ci) {
+        BighornModel self = (BighornModel) (Object) this;
+        ModelPart head = self.head;
+        if (head != null) {
+            ModelPart leftHorn = head.getChild("left_horn");
+            ModelPart rightHorn = head.getChild("right_horn");
+            if (leftHorn != null) leftHorn.visible = false;
+            if (rightHorn != null) rightHorn.visible = false;
+        }
+    }
+}
