@@ -1,1 +1,12 @@
-
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.bighornfix.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "refmap": "bighornfix.refmap.json",
+    "mixins": [
+        "BighornModelMixin"
+    ],
+    "client": [],
+    "server": []
+}
